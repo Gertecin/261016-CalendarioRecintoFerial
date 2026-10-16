@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #1D2E20;
+  background: #F4F6F4;
+}
+
+.pattern-diagonal {
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.35) 0 4px, transparent 4px 8px);
+}
+.pattern-dots {
+  background-image: radial-gradient(rgba(255,255,255,0.5) 1.5px, transparent 1.5px);
+  background-size: 6px 6px;
+}
+
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+::-webkit-scrollbar { height: 8px; width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #C9D1CA; border-radius: 4px; }
+
+.fade-in { animation: fadeIn .25s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
