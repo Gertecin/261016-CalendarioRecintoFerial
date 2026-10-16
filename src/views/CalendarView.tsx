@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useStore } from '../state/store';
 import { CalendarGrid } from '../components/CalendarGrid';
 import { getFairPhases, getFreeM2ForDay } from '../lib/validation';
-import { formatDate, MONTH_NAMES } from '../lib/dates';
+import { formatDate, MONTH_NAMES, addDays } from '../lib/dates';
 
 export const CalendarView = () => {
   const { selectedYear, setSelectedYear, pavilions, fairs } = useStore();
@@ -18,7 +18,7 @@ export const CalendarView = () => {
     let cur = p.inicioMontaje;
     while (cur <= p.finOcupacion) {
       if (cur >= yearStart && cur <= yearEnd) occupiedDays.add(cur);
-      cur = new Date(cur); cur.setUTCDate(cur.getUTCDate() + 1); cur = cur.toISOString().split('T')[0];
+      cur = addDays(cur, 1);
     }
   });
 
@@ -36,7 +36,7 @@ export const CalendarView = () => {
       let cur = ph.inicioMontaje;
       while (cur <= ph.finOcupacion) {
         if (cur >= yearStart && cur <= yearEnd) days.add(cur);
-        cur = new Date(cur); cur.setUTCDate(cur.getUTCDate() + 1); cur = cur.toISOString().split('T')[0];
+        cur = addDays(cur, 1);
       }
     });
     return { ...p, occupiedDays: days.size, percentage: ((days.size / totalDays) * 100).toFixed(1) };
